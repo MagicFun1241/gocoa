@@ -32,7 +32,7 @@ func TestKeyRemove(t *testing.T) {
 	defaults.Remove("TestKey")
 
 	readValue := defaults.GetString("TestKey")
-	if readValue == "" {
+	if readValue != "" {
 		t.Fatalf("read value should be empty string but got %s", readValue)
 	}
 }
