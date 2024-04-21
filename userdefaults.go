@@ -24,6 +24,7 @@ func NewUserDefaults() *UserDefaults {
 func (defaults *UserDefaults) GetString(key string) string {
 	cKey := C.CString(key)
 	defer C.free(unsafe.Pointer(cKey))
+
 	value := C.UserDefaults_GetString(defaults.userDefaultsPtr, cKey)
 	return C.GoString(value)
 }
@@ -32,7 +33,17 @@ func (defaults *UserDefaults) GetString(key string) string {
 func (defaults *UserDefaults) SetString(key string, value string) {
 	cKey := C.CString(key)
 	defer C.free(unsafe.Pointer(cKey))
+
 	cValue := C.CString(value)
 	defer C.free(unsafe.Pointer(cValue))
+
 	C.UserDefaults_SetString(defaults.userDefaultsPtr, cKey, cValue)
+}
+
+// Remove - deletes key from userDefaults.
+func (defaults *UserDefaults) Remove(key string) {
+	cKey := C.CString(key)
+	defer C.free(unsafe.Pointer(cKey))
+
+	C.UserDefaults_Remove(defaults.userDefaultsPtr, cKey)
 }

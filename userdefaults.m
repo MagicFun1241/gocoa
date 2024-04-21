@@ -20,3 +20,10 @@ const char* UserDefaults_GetString(UserDefaultsPtr defaultsPtr, const char *key)
     const char *cValue = [value UTF8String];
     return cValue;
 }
+
+void UserDefaults_Remove(UserDefaultsPtr defaultsPtr, const char *key)
+{
+    NSUserDefaults* defaults = (NSUserDefaults*)defaultsPtr;
+    [defaults removeObjectForKey:[NSString stringWithUTF8String:key]];
+    [defaults synchronize];
+}
