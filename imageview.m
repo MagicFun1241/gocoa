@@ -30,6 +30,13 @@ void ImageView_SetAnimates(ImageViewPtr imageViewPtr, int animates) {
     [nsImageView setAnimates:animates];
 }
 
+void ImageView_SetImageUrl(ImageViewPtr imageViewPtr, const char* url) {
+    NSImage *theImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:[NSString stringWithUTF8String:url]]];
+
+    NSImageView* nsImageView = (NSImageView*)imageViewPtr;
+    [nsImageView setImage:theImage];
+}
+
 void ImageView_SetContentTintColor(ImageViewPtr imageViewPtr, int r, int g, int b, int a) {
     NSImageView* nsImageView = (NSImageView*)imageViewPtr;
     [nsImageView setContentTintColor:[NSColor colorWithCalibratedRed:r/255.f green:g/255.f blue:b/255.f alpha:a/255.f]];
