@@ -2,10 +2,12 @@
 #include "_cgo_export.h"
 
 ButtonPtr ImageView_New(int goButtonID, int x, int y, int w, int h, const char* url) {
-    NSImage *theImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:[NSString stringWithUTF8String:url]]];
-
     id nsImageView = [[[NSImageView alloc] initWithFrame:NSMakeRect(x, y, w, h)] autorelease];
-    [nsImageView setImage:theImage];
+
+    if (url && strlen(url) > 0) {
+        NSImage *theImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:[NSString stringWithUTF8String:url]]];
+        [nsImageView setImage:theImage];
+    }
 
     return (ImageViewPtr)nsImageView;
 }
