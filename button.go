@@ -83,6 +83,7 @@ func NewButton(x int, y int, width int, height int) *Button {
 func (btn *Button) SetTitle(title string) {
 	cTitle := C.CString(title)
 	defer C.free(unsafe.Pointer(cTitle))
+
 	C.Button_SetTitle(btn.buttonPtr, cTitle)
 }
 

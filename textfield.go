@@ -38,6 +38,7 @@ func (textField *TextField) StringValue() string {
 func (textField *TextField) SetStringValue(text string) {
 	cText := C.CString(text)
 	defer C.free(unsafe.Pointer(cText))
+
 	C.TextField_SetStringValue(textField.textFieldPtr, cText)
 }
 
@@ -69,6 +70,7 @@ func (textField *TextField) SetEditable(editable bool) {
 func (textField *TextField) SetFontFamily(fontFamily string) {
 	cText := C.CString(fontFamily)
 	defer C.free(unsafe.Pointer(cText))
+
 	C.TextField_SetFontFamily(textField.textFieldPtr, cText)
 }
 

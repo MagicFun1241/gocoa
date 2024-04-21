@@ -30,6 +30,7 @@ func NewTextView(x int, y int, width int, height int) *TextView {
 func (textview *TextView) SetText(text string) {
 	cText := C.CString(text)
 	defer C.free(unsafe.Pointer(cText))
+
 	C.TextView_SetText(textview.textViewPtr, cText)
 }
 
