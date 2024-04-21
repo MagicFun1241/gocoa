@@ -48,6 +48,21 @@ const (
 
 var imageViews []*ImageView
 
+func NewEmptyImageView(x int, y int, width int, height int) *ImageView {
+	imageViewID := len(imageViews)
+
+	cUrl := C.CString("")
+	defer C.free(unsafe.Pointer(cUrl))
+
+	imageViewPtr := C.ImageView_New(C.int(imageViewID), C.int(x), C.int(y), C.int(width), C.int(height), cUrl)
+
+	img := &ImageView{
+		imageViewPtr: imageViewPtr,
+	}
+	imageViews = append(imageViews, img)
+	return img
+}
+
 func NewImageView(x int, y int, width int, height int, url string) *ImageView {
 	imageViewID := len(imageViews)
 
