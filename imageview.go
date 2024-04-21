@@ -4,7 +4,10 @@ package gocoa
 // #cgo LDFLAGS: -framework Cocoa
 // #import "imageview.h"
 import "C"
-import "fmt"
+import (
+	"fmt"
+	"unsafe"
+)
 
 // Represents an ImageView control that can display images.
 type ImageView struct {
@@ -47,7 +50,11 @@ var imageViews []*ImageView
 
 func NewImageView(x int, y int, width int, height int, url string) *ImageView {
 	imageViewID := len(imageViews)
-	imageViewPtr := C.ImageView_New(C.int(imageViewID), C.int(x), C.int(y), C.int(width), C.int(height), C.CString(url))
+
+	cUrl := C.CString(url)
+	defer C.free(unsafe.Pointer(cUrl))
+
+	imageViewPtr := C.ImageView_New(C.int(imageViewID), C.int(x), C.int(y), C.int(width), C.int(height), cUrl)
 
 	img := &ImageView{
 		imageViewPtr: imageViewPtr,
@@ -74,6 +81,13 @@ func (imageView *ImageView) SetImageAlignment(imageAlignment ImageAlignment) {
 
 func (imageView *ImageView) SetImageScaling(imageScaling ImageScaling) {
 	C.ImageView_SetImageScaling(imageView.imageViewPtr, C.int(imageScaling))
+}
+
+func (imageView *ImageView) SetImageUrl(url string) {
+	cUrl := C.CString(url)
+	defer C.free(unsafe.Pointer(cUrl))
+
+	C.ImageView_SetImageUrl(imageView.imageViewPtr, cUrl)
 }
 
 func (imageView *ImageView) SetAnimates(animates bool) {
