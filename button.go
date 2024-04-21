@@ -5,7 +5,7 @@ package gocoa
 // #import "button.h"
 import "C"
 import (
-	"fmt"
+	"github.com/magicfun1241/gocoa/tools"
 	"unsafe"
 )
 
@@ -110,20 +110,17 @@ func (btn *Button) SetFontSize(fontSize int) {
 }
 
 func (btn *Button) SetColor(hexRGBA string) {
-	var r, g, b, a = 0, 0, 0, 0
-	fmt.Sscanf(hexRGBA, "#%02x%02x%02x%02x", &r, &g, &b, &a)
+	var r, g, b, a = tools.ParseHexRGBA(hexRGBA)
 	C.Button_SetColor(btn.buttonPtr, C.int(r), C.int(g), C.int(b), C.int(a))
 }
 
 func (btn *Button) SetBackgroundColor(hexRGBA string) {
-	var r, g, b, a = 0, 0, 0, 0
-	fmt.Sscanf(hexRGBA, "#%02x%02x%02x%02x", &r, &g, &b, &a)
+	var r, g, b, a = tools.ParseHexRGBA(hexRGBA)
 	C.Button_SetBackgroundColor(btn.buttonPtr, C.int(r), C.int(g), C.int(b), C.int(a))
 }
 
 func (btn *Button) SetBorderColor(hexRGBA string) {
-	var r, g, b, a = 0, 0, 0, 0
-	fmt.Sscanf(hexRGBA, "#%02x%02x%02x%02x", &r, &g, &b, &a)
+	var r, g, b, a = tools.ParseHexRGBA(hexRGBA)
 	C.Button_SetBorderColor(btn.buttonPtr, C.int(r), C.int(g), C.int(b), C.int(a))
 }
 

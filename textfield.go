@@ -5,7 +5,7 @@ package gocoa
 // #import "textfield.h"
 import "C"
 import (
-	"fmt"
+	"github.com/magicfun1241/gocoa/tools"
 	"unsafe"
 )
 
@@ -79,20 +79,17 @@ func (textField *TextField) SetFontSize(fontSize int) {
 }
 
 func (textField *TextField) SetColor(hexRGBA string) {
-	var r, g, b, a = 0, 0, 0, 0
-	fmt.Sscanf(hexRGBA, "#%02x%02x%02x%02x", &r, &g, &b, &a)
+	var r, g, b, a = tools.ParseHexRGBA(hexRGBA)
 	C.TextField_SetColor(textField.textFieldPtr, C.int(r), C.int(g), C.int(b), C.int(a))
 }
 
 func (textField *TextField) SetBackgroundColor(hexRGBA string) {
-	var r, g, b, a = 0, 0, 0, 0
-	fmt.Sscanf(hexRGBA, "#%02x%02x%02x%02x", &r, &g, &b, &a)
+	var r, g, b, a = tools.ParseHexRGBA(hexRGBA)
 	C.TextField_SetBackgroundColor(textField.textFieldPtr, C.int(r), C.int(g), C.int(b), C.int(a))
 }
 
 func (textField *TextField) SetBorderColor(hexRGBA string) {
-	var r, g, b, a = 0, 0, 0, 0
-	fmt.Sscanf(hexRGBA, "#%02x%02x%02x%02x", &r, &g, &b, &a)
+	var r, g, b, a = tools.ParseHexRGBA(hexRGBA)
 	C.TextField_SetBorderColor(textField.textFieldPtr, C.int(r), C.int(g), C.int(b), C.int(a))
 }
 

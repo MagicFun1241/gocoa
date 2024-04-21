@@ -5,7 +5,7 @@ package gocoa
 // #import "imageview.h"
 import "C"
 import (
-	"fmt"
+	"github.com/magicfun1241/gocoa/tools"
 	"unsafe"
 )
 
@@ -114,7 +114,6 @@ func (imageView *ImageView) SetAnimates(animates bool) {
 }
 
 func (imageView *ImageView) SetContentTintColor(hexRGBA string) {
-	var r, g, b, a = 0, 0, 0, 0
-	fmt.Sscanf(hexRGBA, "#%02x%02x%02x%02x", &r, &g, &b, &a)
+	var r, g, b, a = tools.ParseHexRGBA(hexRGBA)
 	C.ImageView_SetContentTintColor(imageView.imageViewPtr, C.int(r), C.int(g), C.int(b), C.int(a))
 }
