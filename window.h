@@ -6,7 +6,7 @@
 #include "imageview.h"
 #include "textview.h"
 #include "textfield.h"
-#include "progressIndicator.h"
+#include "progressindicator.h"
 #include "slider.h"
 
 void* Window_New(int goWindowID, int x, int y, int width, int height, const char* title);

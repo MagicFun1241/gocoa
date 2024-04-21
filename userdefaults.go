@@ -2,7 +2,7 @@ package gocoa
 
 // #cgo CFLAGS: -x objective-c
 // #cgo LDFLAGS: -framework Foundation
-// #import "userDefaults.h"
+// #import "userdefaults.h"
 import "C"
 import "unsafe"
 

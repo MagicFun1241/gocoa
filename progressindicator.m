@@ -1,4 +1,4 @@
-#import "progressIndicator.h"
+#import "progressindicator.h"
 #include "_cgo_export.h"
 
 ProgressIndicatorPtr ProgressIndicator_New(int x, int y, int width, int height) {

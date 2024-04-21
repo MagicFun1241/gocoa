@@ -2,7 +2,7 @@ package gocoa
 
 // #cgo CFLAGS: -x objective-c
 // #cgo LDFLAGS: -framework Cocoa
-// #import "progressIndicator.h"
+// #import "progressindicator.h"
 import "C"
 
 // ProgressIndicator represents a indicator control that can trigger actions.
