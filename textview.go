@@ -32,3 +32,7 @@ func (textview *TextView) SetText(text string) {
 	defer C.free(unsafe.Pointer(cText))
 	C.TextView_SetText(textview.textViewPtr, cText)
 }
+
+func (textview *TextView) Remove() {
+	C.TextView_Remove(textview.textViewPtr)
+}

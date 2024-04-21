@@ -15,3 +15,8 @@ void TextView_SetText(TextViewPtr textViewPtr, const char* text) {
 	NSTextView* tv = (NSTextView*)textViewPtr;
 	[tv setString:[NSString stringWithUTF8String:text]];
 }
+
+void TextView_Remove(TextViewPtr textViewPtr) {
+    NSTextView* tv = (NSTextView*)textViewPtr;
+    [tv removeFromSuperview];
+}
