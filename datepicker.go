@@ -4,6 +4,7 @@ package gocoa
 // #cgo LDFLAGS: -framework Cocoa
 // #import "datepicker.h"
 import "C"
+import "unsafe"
 
 // DatePicker represents a date picker control that can trigger actions.
 type DatePicker struct {
@@ -48,15 +49,33 @@ func (datePicker *DatePicker) SetMode(mode DatePickerMode) {
 }
 
 func (datePicker *DatePicker) SetDate(date string) {
-	C.DatePicker_SetDate(datePicker.datePickerPtr, C.CString(date), C.CString(datePickerFormats[datePicker.datePickerID]))
+	cDate := C.CString(date)
+	defer C.free(unsafe.Pointer(cDate))
+
+	cDateFormat := C.CString(datePickerFormats[datePicker.datePickerID])
+	defer C.free(unsafe.Pointer(cDateFormat))
+
+	C.DatePicker_SetDate(datePicker.datePickerPtr, cDate, cDateFormat)
 }
 
 func (datePicker *DatePicker) SetMinimumDate(date string) {
-	C.DatePicker_SetMinimumDate(datePicker.datePickerPtr, C.CString(date), C.CString(datePickerFormats[datePicker.datePickerID]))
+	cDate := C.CString(date)
+	defer C.free(unsafe.Pointer(cDate))
+
+	cDateFormat := C.CString(datePickerFormats[datePicker.datePickerID])
+	defer C.free(unsafe.Pointer(cDateFormat))
+
+	C.DatePicker_SetMinimumDate(datePicker.datePickerPtr, cDate, cDateFormat)
 }
 
 func (datePicker *DatePicker) SetMaximumDate(date string) {
-	C.DatePicker_SetMaximumDate(datePicker.datePickerPtr, C.CString(date), C.CString(datePickerFormats[datePicker.datePickerID]))
+	cDate := C.CString(date)
+	defer C.free(unsafe.Pointer(cDate))
+
+	cDateFormat := C.CString(datePickerFormats[datePicker.datePickerID])
+	defer C.free(unsafe.Pointer(cDateFormat))
+
+	C.DatePicker_SetMaximumDate(datePicker.datePickerPtr, cDate, cDateFormat)
 }
 
 func (datePicker *DatePicker) SetDateFormat(dateFormat string) {
