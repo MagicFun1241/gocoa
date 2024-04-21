@@ -24,3 +24,7 @@ func NewSearchField(x int, y int, width int, height int) *SearchField {
 	searchfields = append(searchfields, sf)
 	return sf
 }
+
+func (searchField *SearchField) Remove() {
+	C.SearchField_Remove(searchField.searchFieldPtr)
+}

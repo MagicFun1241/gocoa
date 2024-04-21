@@ -9,3 +9,4 @@
 typedef void* SearchFieldPtr;
 
 SearchFieldPtr SearchField_New(int goSearchFieldId, int x, int y, int w, int h);
+void SearchField_Remove(SearchFieldPtr searchFieldPtr);
