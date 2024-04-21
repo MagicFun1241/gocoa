@@ -4,7 +4,10 @@ package gocoa
 // #cgo LDFLAGS: -framework Cocoa
 // #import "textview.h"
 import "C"
-import "unsafe"
+import (
+	"github.com/magicfun1241/gocoa/tools"
+	"unsafe"
+)
 
 // TextView - represents a textView control that can trigger actions.
 type TextView struct {
@@ -32,6 +35,11 @@ func (textview *TextView) SetText(text string) {
 	defer C.free(unsafe.Pointer(cText))
 
 	C.TextView_SetText(textview.textViewPtr, cText)
+}
+
+func (textview *TextView) SetBackgroundColor(hexRGBA string) {
+	var r, g, b, a = tools.ParseHexRGBA(hexRGBA)
+	C.TextView_SetBackgroundColor(textview.textViewPtr, C.int(r), C.int(g), C.int(b), C.int(a))
 }
 
 func (textview *TextView) Remove() {

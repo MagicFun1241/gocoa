@@ -16,6 +16,12 @@ void TextView_SetText(TextViewPtr textViewPtr, const char* text) {
 	[tv setString:[NSString stringWithUTF8String:text]];
 }
 
+void TextView_SetBackgroundColor(TextViewPtr textViewPtr, int r, int g, int b, int a) {
+     NSTextView* tv = (NSTextView*)textViewPtr;
+     //[button setBordered:false];
+     [tv setBackgroundColor:[NSColor colorWithCalibratedRed:r/255.f green:g/255.f blue:b/255.f alpha:a/255.f]];
+}
+
 void TextView_Remove(TextViewPtr textViewPtr) {
     NSTextView* tv = (NSTextView*)textViewPtr;
     [tv removeFromSuperview];
