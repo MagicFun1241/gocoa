@@ -92,3 +92,8 @@ void TextField_SetSelectable(TextFieldPtr textFieldPtr, const int selectable) {
 	NSTextField* textField = (NSTextField*)textFieldPtr;
 	[textField setSelectable:selectable];
 }
+
+void TextField_Remove(TextFieldPtr textFieldPtr) {
+    NSTextField* tf = (NSTextField*)textFieldPtr;
+    [tf removeFromSuperview];
+}

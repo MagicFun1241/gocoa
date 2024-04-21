@@ -121,3 +121,7 @@ func (textField *TextField) SetSelectable(selectable bool) {
 		C.TextField_SetSelectable(textField.textFieldPtr, C.int(0))
 	}
 }
+
+func (textField *TextField) Remove() {
+	C.TextField_Remove(textField.textFieldPtr)
+}
