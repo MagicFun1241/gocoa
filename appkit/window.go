@@ -1,4 +1,4 @@
-package gocoa
+package appkit
 
 // #cgo CFLAGS: -x objective-c
 // #cgo LDFLAGS: -framework Cocoa
@@ -88,6 +88,11 @@ func (wnd *Window) MakeKeyAndOrderFront() {
 // AddButton adds a Button to the window.
 func (wnd *Window) AddButton(btn *Button) {
 	C.Window_AddButton(wnd.winPtr, btn.buttonPtr)
+}
+
+// AddWebView adds a WebView to the window.
+func (wnd *Window) AddWebView(webview *WebView) {
+	C.Window_AddWebView(wnd.winPtr, webview.webviewPtr)
 }
 
 // AddDatePicker adds a DatePicker to the window.

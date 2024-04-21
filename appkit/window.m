@@ -101,6 +101,13 @@ void Window_AddTextField(void *wndPtr, TextFieldPtr tfPtr)
     [[window contentView] addSubview:textfield];
 }
 
+void Window_AddWebView(void *wndPtr, WebViewPtr wvPtr)
+{
+    WKWebView* webview = (WKWebView*)wvPtr;
+    NSWindow* window = (NSWindow*)wndPtr;
+    [[window contentView] addSubview:webview];
+}
+
 void Window_AddSearchField(void *wndPtr, SearchFieldPtr tfPtr)
 {
     NSSearchField* searchfield = (NSSearchField*)tfPtr;

@@ -1,5 +1,8 @@
 #import <Cocoa/Cocoa.h>
 
+#import <Foundation/Foundation.h>
+#import <WebKit/WebKit.h>
+
 #include "button.h"
 #include "combobox.h"
 #include "datepicker.h"
@@ -7,6 +10,7 @@
 #include "textview.h"
 #include "textfield.h"
 #include "searchfield.h"
+#include "webview.h"
 #include "progressindicator.h"
 #include "slider.h"
 
@@ -26,6 +30,7 @@ void Window_AddProgressIndicator(void *wndPtr, ProgressIndicatorPtr progressIndi
 void Window_AddImageView(void *wndPtr, ImageViewPtr imageViewPtr);
 void Window_AddSlider(void *wndPtr, SliderPtr sliderPtr);
 void Window_AddComboBox(void *wndPtr, ComboBoxPtr comboBoxPtr);
+void Window_AddWebView(void *wndPtr, WebViewPtr wvPtr);
 void Window_Update(void *wndPtr);
 void Window_SetTitle(void *wndPtr, const char* title);
 void Window_SetMiniaturizeButtonEnabled(void *wndPtr, int enabled);

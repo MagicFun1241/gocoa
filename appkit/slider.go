@@ -1,4 +1,4 @@
-package gocoa
+package appkit
 
 // #cgo CFLAGS: -x objective-c
 // #cgo LDFLAGS: -framework Cocoa
