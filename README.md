@@ -1,15 +1,15 @@
 # gocoa
 
-[![GoDoc](https://godoc.org/github.com/mojbro/gocoa?status.svg)](https://godoc.org/github.com/mojbro/gocoa)
-[![Go Report Card](https://goreportcard.com/badge/github.com/mojbro/gocoa)](https://goreportcard.com/report/github.com/mojbro/gocoa)
+[![GoDoc](https://godoc.org/github.com/magicfun1241/gocoa?status.svg)](https://godoc.org/github.com/magicfun1241/gocoa)
+[![Go Report Card](https://goreportcard.com/badge/github.com/magicfun1241/gocoa)](https://goreportcard.com/report/github.com/magicfun1241/gocoa)
 
 Go bindings for the Cocoa framework to build macOS applications.
 
-<img src="resources/images/helloworld-screenshot.gif" width="480" />
+[//]: # (<img src="resources/images/helloworld-screenshot.gif" width="480" />)
 
 ## How to use
 
-The following is a basic [Hello World](examples/helloworld) application.
+[//]: # (The following is a basic [Hello World]&#40;examples/helloworld&#41; application.)
 
 ```go
 package main
