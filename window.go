@@ -80,7 +80,7 @@ func (wnd *Window) GetScreen() *Screen {
 }
 
 // MakeKeyAndOrderFront moves the window to the front of the screen list, within its
-// level and it shows the window.
+// level, and it shows the window.
 func (wnd *Window) MakeKeyAndOrderFront() {
 	C.Window_MakeKeyAndOrderFront(wnd.winPtr)
 }
@@ -95,17 +95,17 @@ func (wnd *Window) AddDatePicker(datePicker *DatePicker) {
 	C.Window_AddDatePicker(wnd.winPtr, datePicker.datePickerPtr)
 }
 
-// AddTextView - adds a Button to the window.
+// AddTextView - adds a TextView to the window.
 func (wnd *Window) AddTextView(tv *TextView) {
 	C.Window_AddTextView(wnd.winPtr, tv.textViewPtr)
 }
 
-// AddTextField - adds a Button to the window.
+// AddTextField - adds a TextField to the window.
 func (wnd *Window) AddTextField(tv *TextField) {
 	C.Window_AddTextField(wnd.winPtr, tv.textFieldPtr)
 }
 
-// AddTextField - adds a Button to the window.
+// AddTextField - adds a TextField to the window.
 func (wnd *Window) AddLabel(tv *TextField) {
 	C.Window_AddTextField(wnd.winPtr, tv.textFieldPtr)
 }
@@ -120,10 +120,12 @@ func (wnd *Window) AddImageView(imageView *ImageView) {
 	C.Window_AddImageView(wnd.winPtr, imageView.imageViewPtr)
 }
 
+// AddSlider adds an Slider to the window.
 func (wnd *Window) AddSlider(slider *Slider) {
 	C.Window_AddSlider(wnd.winPtr, slider.sliderPtr)
 }
 
+// AddComboBox adds an ComboBox to the window.
 func (wnd *Window) AddComboBox(comboBox *ComboBox) {
 	C.Window_AddComboBox(wnd.winPtr, comboBox.comboBoxPtr)
 }
