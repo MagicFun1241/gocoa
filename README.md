@@ -67,7 +67,7 @@ Not all methods are implemented
 - [x] ComboBox
 - [x] ProgressIndicator
 - [x] Slider
-- [ ] WebView
+- [x] WebView
 
 #### Additional APIs
 - [x] UserDefaults
