@@ -4,6 +4,7 @@ package gocoa
 // #cgo LDFLAGS: -framework Cocoa
 // #import "combobox.h"
 import "C"
+import "unsafe"
 
 type ComboBox struct {
 	comboBoxPtr C.ComboBoxPtr
@@ -26,7 +27,10 @@ func NewComboBox(x int, y int, width int, height int) *ComboBox {
 }
 
 func (comboBox *ComboBox) AddItem(item string) {
-	C.ComboBox_AddItem(comboBox.comboBoxPtr, C.CString(item))
+	cItem := C.CString(item)
+	defer C.free(unsafe.Pointer(cItem))
+
+	C.ComboBox_AddItem(comboBox.comboBoxPtr, cItem)
 }
 
 func (comboBox *ComboBox) SetEditable(editable bool) {
