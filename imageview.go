@@ -48,7 +48,7 @@ const (
 
 var imageViews []*ImageView
 
-func NewEmptyImageView(x int, y int, width int, height int) *ImageView {
+func NewImageView(x int, y int, width int, height int) *ImageView {
 	imageViewID := len(imageViews)
 
 	cUrl := C.CString("")
@@ -63,7 +63,7 @@ func NewEmptyImageView(x int, y int, width int, height int) *ImageView {
 	return img
 }
 
-func NewImageView(x int, y int, width int, height int, url string) *ImageView {
+func NewImageViewWithUrl(x int, y int, width int, height int, url string) *ImageView {
 	imageViewID := len(imageViews)
 
 	cUrl := C.CString(url)
