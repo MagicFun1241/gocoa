@@ -134,6 +134,10 @@ func (btn *Button) SetState(state ButtonState) {
 	C.Button_SetState(btn.buttonPtr, C.int(state))
 }
 
+func (btn *Button) Remove() {
+	C.Button_Remove(btn.buttonPtr)
+}
+
 func (btn *Button) State() ButtonState {
 	return ButtonState(int(C.Button_State(btn.buttonPtr)))
 }

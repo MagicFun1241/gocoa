@@ -22,6 +22,12 @@ ButtonPtr Button_New(int goButtonID, int x, int y, int w, int h) {
     return (ButtonPtr)nsButton;
 }
 
+
+void Button_Remove(ButtonPtr btnPtr) {
+    NSButton* button = (NSButton*)btnPtr;
+    [button removeFromSuperview];
+}
+
 void Button_SetTitle(ButtonPtr btnPtr, const char* title) {
     NSButton* button = (NSButton*)btnPtr;
     [button setTitle:[NSString stringWithUTF8String:title]];
