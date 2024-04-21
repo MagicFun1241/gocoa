@@ -5,14 +5,14 @@ import (
 )
 
 func TestNewPUserDefaults(t *testing.T) {
-	defaults := NewPUserDefaults()
+	defaults := NewUserDefaults()
 	if defaults.userDefaultsPtr == nil {
 		t.Fatalf("pointer to C defaults is nil!")
 	}
 }
 
 func TestStringValue(t *testing.T) {
-	defaults := NewPUserDefaults()
+	defaults := NewUserDefaults()
 	value := "FooBar!"
 	defaults.SetString("TestKey", value)
 	readValue := defaults.GetString("TestKey")
