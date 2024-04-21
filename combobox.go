@@ -58,11 +58,17 @@ func (comboBox *ComboBox) SetSelectedIndex(selectedIndex int) {
 }
 
 func (comboBox *ComboBox) SetSelectedText(selectedText string) {
-	C.ComboBox_SetSelectedText(comboBox.comboBoxPtr, C.CString(selectedText))
+	cSelectedText := C.CString(selectedText)
+	defer C.free(unsafe.Pointer(cSelectedText))
+
+	C.ComboBox_SetSelectedText(comboBox.comboBoxPtr, cSelectedText)
 }
 
 func (comboBox *ComboBox) SetStringValue(stringValue string) {
-	C.ComboBox_SetStringValue(comboBox.comboBoxPtr, C.CString(stringValue))
+	cStringValue := C.CString(stringValue)
+	defer C.free(unsafe.Pointer(cStringValue))
+
+	C.ComboBox_SetStringValue(comboBox.comboBoxPtr, cStringValue)
 }
 
 //export onSelectionDidChange
