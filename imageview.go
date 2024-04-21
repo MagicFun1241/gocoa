@@ -105,6 +105,12 @@ func (imageView *ImageView) SetImageUrl(url string) {
 	C.ImageView_SetImageUrl(imageView.imageViewPtr, cUrl)
 }
 
+func (imageView *ImageView) SetImageBytes(imageData []byte) {
+	cChar := (*C.uchar)(unsafe.Pointer(&imageData[0]))
+
+	C.ImageView_SetImageBytes(imageView.imageViewPtr, cChar, C.int(len(imageData)))
+}
+
 func (imageView *ImageView) SetAnimates(animates bool) {
 	if animates {
 		C.ImageView_SetAnimates(imageView.imageViewPtr, 1)
