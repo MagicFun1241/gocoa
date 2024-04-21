@@ -53,6 +53,28 @@ func main() {
 This package is very, very early and incomplete! It is mostly just an experiment and is not really
 useful yet.
 
+### Partial implementation
+
+Not all methods are implemented
+
+#### Components
+- [x] TextView
+- [x] TextField
+- [x] SearchField
+- [x] ImageView
+- [x] Button
+- [x] DatePicker
+- [x] ComboBox
+- [x] ProgressIndicator
+- [x] Slider
+
+#### Additional APIs
+- [x] UserDefaults
+
+
 ## Contributors
 
+This is fork of [gocoa](https://github.com/mojbro/gocoa) with already merged pull request and small refactor
+
+### Notice from original repository: 
 Big thanks to [Philipp Haussleiter](https://github.com/phaus) who has contributed a great deal to this project.
