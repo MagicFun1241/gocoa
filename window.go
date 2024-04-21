@@ -105,7 +105,12 @@ func (wnd *Window) AddTextField(tv *TextField) {
 	C.Window_AddTextField(wnd.winPtr, tv.textFieldPtr)
 }
 
-// AddTextField - adds a TextField to the window.
+// AddSearchField - adds a SearchField to the window.
+func (wnd *Window) AddSearchField(sf *SearchField) {
+	C.Window_AddSearchField(wnd.winPtr, sf.searchFieldPtr)
+}
+
+// AddLabel - adds a TextField to the window.
 func (wnd *Window) AddLabel(tv *TextField) {
 	C.Window_AddTextField(wnd.winPtr, tv.textFieldPtr)
 }

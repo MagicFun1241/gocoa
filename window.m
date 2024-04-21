@@ -101,6 +101,13 @@ void Window_AddTextField(void *wndPtr, TextFieldPtr tfPtr)
     [[window contentView] addSubview:textfield];
 }
 
+void Window_AddSearchField(void *wndPtr, SearchFieldPtr tfPtr)
+{
+    NSSearchField* searchfield = (NSSearchField*)tfPtr;
+    NSWindow* window = (NSWindow*)wndPtr;
+    [[window contentView] addSubview:searchfield];
+}
+
 void Window_AddProgressIndicator(void *wndPtr, ProgressIndicatorPtr progressIndicatorPtr)
 {
     NSProgressIndicator* indicator = (NSProgressIndicator*)progressIndicatorPtr;

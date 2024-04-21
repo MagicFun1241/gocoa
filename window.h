@@ -6,6 +6,7 @@
 #include "imageview.h"
 #include "textview.h"
 #include "textfield.h"
+#include "searchfield.h"
 #include "progressindicator.h"
 #include "slider.h"
 
@@ -20,6 +21,7 @@ void Window_AddButton(void *wndPtr, ButtonPtr btnPtr);
 void Window_AddDatePicker(void *wndPtr, DatePickerPtr datePickerPtr);
 void Window_AddTextView(void *wndPtr, TextViewPtr tvPtr);
 void Window_AddTextField(void *wndPtr, TextFieldPtr tfPtr);
+void Window_AddSearchField(void *wndPtr, SearchFieldPtr tfPtr);
 void Window_AddProgressIndicator(void *wndPtr, ProgressIndicatorPtr progressIndicatorPtr);
 void Window_AddImageView(void *wndPtr, ImageViewPtr imageViewPtr);
 void Window_AddSlider(void *wndPtr, SliderPtr sliderPtr);
