@@ -145,6 +145,22 @@ func (wnd *Window) Update() {
 	C.Window_Update(wnd.winPtr)
 }
 
+func (wnd *Window) GetX() int {
+	return wnd.x
+}
+
+func (wnd *Window) GetY() int {
+	return wnd.y
+}
+
+func (wnd *Window) GetWidth() int {
+	return wnd.w
+}
+
+func (wnd *Window) GetHeight() int {
+	return wnd.h
+}
+
 func (wnd *Window) SetTitle(title string) {
 	cTitle := C.CString(title)
 	defer C.free(unsafe.Pointer(cTitle))
