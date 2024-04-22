@@ -17,7 +17,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/magicfun1241/gocoa"
+	"github.com/magicfun1241/gocoa/appkit"
 )
 
 func main() {
