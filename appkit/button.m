@@ -22,7 +22,6 @@ ButtonPtr Button_New(int goButtonID, int x, int y, int w, int h) {
     return (ButtonPtr)nsButton;
 }
 
-
 void Button_Remove(ButtonPtr btnPtr) {
     NSButton* button = (NSButton*)btnPtr;
     [button removeFromSuperview];
