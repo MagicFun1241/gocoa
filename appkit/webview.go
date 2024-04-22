@@ -42,6 +42,33 @@ func (webview *WebView) SetUrl(url string) {
 	C.WebView_SetUrl(webview.webviewPtr, cUrl)
 }
 
+func (webview *WebView) SetFrame(x, y, w, h int) {
+	C.WebView_SetFrame(webview.webviewPtr, C.int(x), C.int(y), C.int(w), C.int(h))
+}
+
+func (webview *WebView) SetAllowsMagnification(allows bool) {
+	if allows {
+		C.WebView_SetAllowsMagnification(webview.webviewPtr, C.int(1))
+	} else {
+		C.WebView_SetAllowsMagnification(webview.webviewPtr, C.int(0))
+	}
+}
+
+func (webview *WebView) SetAllowsBackForwardNavigationGestures(allows bool) {
+	if allows {
+		C.WebView_SetAllowsBackForwardNavigationGestures(webview.webviewPtr, C.int(1))
+	} else {
+		C.WebView_SetAllowsBackForwardNavigationGestures(webview.webviewPtr, C.int(0))
+	}
+}
+
+func (webview *WebView) SetCustomUserAgent(userAgent string) {
+	cUserAgent := C.CString(userAgent)
+	defer C.free(unsafe.Pointer(cUserAgent))
+
+	C.WebView_SetCustomUserAgent(webview.webviewPtr, cUserAgent)
+}
+
 func (webview *WebView) Remove() {
 	C.WebView_Remove(webview.webviewPtr)
 }
