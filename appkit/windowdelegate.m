@@ -50,7 +50,7 @@ void triggerEvent(int goWindowID, NSWindow *movedWindow, NSString *eventTitle, c
         int y = (int)(rect.origin.y);
         int w = (int)(rect.size.width);
         int h = (int)(rect.size.height);
-        NSLog(@"%@ %@", eventTitle, movedWindow);
+//        NSLog(@"%@ %@", eventTitle, movedWindow);
         onWindowEvent(goWindowID, eventId, x, y, w, h);
     }
 }
