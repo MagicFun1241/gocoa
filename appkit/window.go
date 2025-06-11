@@ -469,6 +469,15 @@ func (wnd *Window) GetRepresentedFilename() string {
 	return C.GoString(cStr)
 }
 
+// GetContentView returns the window's content view
+func (wnd *Window) GetContentView() *View {
+	contentViewPtr := C.Window_GetContentView(wnd.winPtr)
+	if contentViewPtr == nil {
+		return nil
+	}
+	return &View{viewPtr: contentViewPtr}
+}
+
 // Title methods
 func (wnd *Window) SetTitle(title string) {
 	cTitle := C.CString(title)

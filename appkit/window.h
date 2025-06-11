@@ -14,6 +14,7 @@
 #include "progressindicator.h"
 #include "slider.h"
 #include "view.h"
+#include "constraint.h"
 
 // Window creation and basic functions
 void* Window_New(int goWindowID, int x, int y, int width, int height, const char* title);
@@ -94,6 +95,9 @@ void Window_SetDocumentEdited(void *wndPtr, int edited);
 int Window_IsDocumentEdited(void *wndPtr);
 void Window_SetRepresentedFilename(void *wndPtr, const char* filename);
 char* Window_GetRepresentedFilename(void *wndPtr);
+
+// Content view access
+void* Window_GetContentView(void *wndPtr);
 
 // Title and controls
 void Window_SetTitle(void *wndPtr, const char* title);

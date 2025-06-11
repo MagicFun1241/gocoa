@@ -5,8 +5,9 @@ package appkit
 // #import "button.h"
 import "C"
 import (
-	"github.com/magicfun1241/gocoa/tools"
 	"unsafe"
+
+	"github.com/magicfun1241/gocoa/tools"
 )
 
 // Button represents a button control that can trigger actions.
@@ -143,4 +144,9 @@ func (btn *Button) State() ButtonState {
 // OnClick - function, that will be triggered, if the button is clicked.
 func (btn *Button) OnClick(fn func()) {
 	btn.callback = fn
+}
+
+// Ptr returns the underlying unsafe.Pointer for the button (for constraint usage)
+func (btn *Button) Ptr() unsafe.Pointer {
+	return unsafe.Pointer(btn.buttonPtr)
 }

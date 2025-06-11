@@ -405,6 +405,13 @@ char* Window_GetRepresentedFilename(void *wndPtr)
     return result;
 }
 
+// Content view access
+void* Window_GetContentView(void *wndPtr)
+{
+    NSWindow* window = (NSWindow*)wndPtr;
+    return [window contentView];
+}
+
 // Title and controls
 void Window_SetTitle(void *wndPtr, const char* title)
 {
