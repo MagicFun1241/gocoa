@@ -13,6 +13,7 @@
 #include "webview.h"
 #include "progressindicator.h"
 #include "slider.h"
+#include "view.h"
 
 // Window creation and basic functions
 void* Window_New(int goWindowID, int x, int y, int width, int height, const char* title);

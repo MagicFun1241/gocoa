@@ -5,6 +5,8 @@
 
 Go bindings for the Cocoa framework to build macOS applications.
 
+Goal: target macOS 10.15 and upper without deprecated methods support
+
 ## How to use
 
 [//]: # (The following is a basic [Hello World]&#40;examples/helloworld&#41; application.)
@@ -66,6 +68,7 @@ Not all methods are implemented
 - [x] ProgressIndicator
 - [x] Slider
 - [x] WebView
+- [x] View
 
 #### Methods
 - [x] RunOnMainThread
