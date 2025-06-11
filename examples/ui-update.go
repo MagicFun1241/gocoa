@@ -26,6 +26,7 @@ func main() {
 		// Set window properties
 		window.SetTitle("Gocoa Component Demo")
 		window.MakeKeyAndOrderFront()
+		window.AddDefaultQuitMenu()
 
 		// Demo different components
 		setupWindowComponents(window)
