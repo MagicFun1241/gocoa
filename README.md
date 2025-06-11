@@ -5,8 +5,6 @@
 
 Go bindings for the Cocoa framework to build macOS applications.
 
-[//]: # (<img src="resources/images/helloworld-screenshot.gif" width="480" />)
-
 ## How to use
 
 [//]: # (The following is a basic [Hello World]&#40;examples/helloworld&#41; application.)
@@ -68,6 +66,9 @@ Not all methods are implemented
 - [x] ProgressIndicator
 - [x] Slider
 - [x] WebView
+
+#### Methods
+- [x] RunOnMainThread
 
 #### Additional APIs
 - [x] UserDefaults
