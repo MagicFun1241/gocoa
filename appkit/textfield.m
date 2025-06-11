@@ -93,6 +93,76 @@ void TextField_SetSelectable(TextFieldPtr textFieldPtr, const int selectable) {
 	[textField setSelectable:selectable];
 }
 
+void TextField_SetAlignment(TextFieldPtr textFieldPtr, const int alignment) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	[textField setAlignment:alignment];
+}
+
+const char* TextField_PlaceholderString(TextFieldPtr textFieldPtr) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	NSString* placeholder = [textField placeholderString];
+	return placeholder ? [placeholder cStringUsingEncoding:NSISOLatin1StringEncoding] : "";
+}
+
+void TextField_SetPlaceholderString(TextFieldPtr textFieldPtr, const char* placeholder) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	[textField setPlaceholderString:[NSString stringWithUTF8String:placeholder]];
+}
+
+const int TextField_MaximumNumberOfLines(TextFieldPtr textFieldPtr) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	return (int)[textField maximumNumberOfLines];
+}
+
+void TextField_SetMaximumNumberOfLines(TextFieldPtr textFieldPtr, const int maxLines) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	[textField setMaximumNumberOfLines:maxLines];
+}
+
+const int TextField_UsesSingleLineMode(TextFieldPtr textFieldPtr) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	return [textField usesSingleLineMode] ? 1 : 0;
+}
+
+void TextField_SetUsesSingleLineMode(TextFieldPtr textFieldPtr, const int singleLine) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	[textField setUsesSingleLineMode:singleLine ? YES : NO];
+}
+
+const int TextField_LineBreakMode(TextFieldPtr textFieldPtr) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	return (int)[[textField cell] lineBreakMode];
+}
+
+void TextField_SetLineBreakMode(TextFieldPtr textFieldPtr, const int lineBreakMode) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	[[textField cell] setLineBreakMode:lineBreakMode];
+}
+
+void TextField_SetTextColor(TextFieldPtr textFieldPtr, const int r, const int g, const int b, const int a) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	[textField setTextColor:[NSColor colorWithCalibratedRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a/255.0f]];
+}
+
+void TextField_SetFont(TextFieldPtr textFieldPtr, const char* fontName, const double fontSize) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	NSString* fontNameStr = [NSString stringWithUTF8String:fontName];
+	NSFont* font = [NSFont fontWithName:fontNameStr size:fontSize];
+	if (font) {
+		[textField setFont:font];
+	}
+}
+
+const int TextField_IsHighlighted(TextFieldPtr textFieldPtr) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	return [textField isHighlighted] ? 1 : 0;
+}
+
+void TextField_SetHighlighted(TextFieldPtr textFieldPtr, const int highlighted) {
+	NSTextField* textField = (NSTextField*)textFieldPtr;
+	[textField setHighlighted:highlighted ? YES : NO];
+}
+
 void TextField_Remove(TextFieldPtr textFieldPtr) {
     NSTextField* tf = (NSTextField*)textFieldPtr;
     [tf removeFromSuperview];
