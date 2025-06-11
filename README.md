@@ -69,6 +69,7 @@ Not all methods are implemented
 - [x] Slider
 - [x] WebView
 - [x] View
+- [x] LayoutConstraint
 
 #### Methods
 - [x] RunOnMainThread
