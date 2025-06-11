@@ -16,6 +16,25 @@ const (
 	didDeminiaturize WindowEvent = 3
 )
 
+// WindowLevel constants for different window levels
+type WindowLevel int
+
+const (
+	NormalWindowLevel            WindowLevel = 0
+	FloatingWindowLevel          WindowLevel = 3
+	SubmenuWindowLevel           WindowLevel = 3
+	TornOffMenuWindowLevel       WindowLevel = 3
+	MainMenuWindowLevel          WindowLevel = 24
+	StatusWindowLevel            WindowLevel = 25
+	ModalPanelWindowLevel        WindowLevel = 8
+	PopUpMenuWindowLevel         WindowLevel = 101
+	DraggingWindowLevel          WindowLevel = 500
+	ScreenSaverWindowLevel       WindowLevel = 1000
+	AssistiveTechHighWindowLevel WindowLevel = 1500
+	DockWindowLevel              WindowLevel = 20
+	OverlayWindowLevel           WindowLevel = 102
+)
+
 // EventHandler - handler functions that accepts the updated window as parameter
 type EventHandler func(wnd *Window)
 
@@ -85,6 +104,66 @@ func (wnd *Window) MakeKeyAndOrderFront() {
 	C.Window_MakeKeyAndOrderFront(wnd.winPtr)
 }
 
+// OrderFront moves the window to the front of its level without changing key or main window
+func (wnd *Window) OrderFront() {
+	C.Window_OrderFront(wnd.winPtr)
+}
+
+// OrderBack moves the window to the back of its level without changing key or main window
+func (wnd *Window) OrderBack() {
+	C.Window_OrderBack(wnd.winPtr)
+}
+
+// OrderOut removes the window from the screen (hides it)
+func (wnd *Window) OrderOut() {
+	C.Window_OrderOut(wnd.winPtr)
+}
+
+// OrderFrontRegardless moves window to front even if app isn't active
+func (wnd *Window) OrderFrontRegardless() {
+	C.Window_OrderFrontRegardless(wnd.winPtr)
+}
+
+// Close removes the window from screen and releases it if configured to do so
+func (wnd *Window) Close() {
+	C.Window_Close(wnd.winPtr)
+}
+
+// PerformClose simulates clicking the close button (with validation)
+func (wnd *Window) PerformClose() {
+	C.Window_PerformClose(wnd.winPtr)
+}
+
+// Center positions the window in the center of the screen
+func (wnd *Window) Center() {
+	C.Window_Center(wnd.winPtr)
+}
+
+// Miniaturize minimizes the window to the dock
+func (wnd *Window) Miniaturize() {
+	C.Window_Miniaturize(wnd.winPtr)
+}
+
+// Deminiaturize restores window from dock
+func (wnd *Window) Deminiaturize() {
+	C.Window_Deminiaturize(wnd.winPtr)
+}
+
+// Zoom toggles window zoom state
+func (wnd *Window) Zoom() {
+	C.Window_Zoom(wnd.winPtr)
+}
+
+// MakeKeyWindow makes this window the key window
+func (wnd *Window) MakeKeyWindow() {
+	C.Window_MakeKeyWindow(wnd.winPtr)
+}
+
+// MakeMainWindow makes this window the main window
+func (wnd *Window) MakeMainWindow() {
+	C.Window_MakeMainWindow(wnd.winPtr)
+}
+
 // AddButton adds a Button to the window.
 func (wnd *Window) AddButton(btn *Button) {
 	C.Window_AddButton(wnd.winPtr, btn.buttonPtr)
@@ -145,6 +224,17 @@ func (wnd *Window) Update() {
 	C.Window_Update(wnd.winPtr)
 }
 
+// Display forces the window to redraw
+func (wnd *Window) Display() {
+	C.Window_Display(wnd.winPtr)
+}
+
+// InvalidateShadow marks the window shadow for redraw
+func (wnd *Window) InvalidateShadow() {
+	C.Window_InvalidateShadow(wnd.winPtr)
+}
+
+// Position and size getters
 func (wnd *Window) GetX() int {
 	return wnd.x
 }
@@ -161,12 +251,237 @@ func (wnd *Window) GetHeight() int {
 	return wnd.h
 }
 
+// SetFrame sets the window's frame rectangle
+func (wnd *Window) SetFrame(x, y, width, height int, display bool) {
+	if display {
+		C.Window_SetFrameDisplay(wnd.winPtr, C.int(x), C.int(y), C.int(width), C.int(height), C.int(1))
+	} else {
+		C.Window_SetFrameDisplay(wnd.winPtr, C.int(x), C.int(y), C.int(width), C.int(height), C.int(0))
+	}
+	wnd.x = x
+	wnd.y = y
+	wnd.w = width
+	wnd.h = height
+}
+
+// SetFrameOrigin sets just the window's origin
+func (wnd *Window) SetFrameOrigin(x, y int) {
+	C.Window_SetFrameOrigin(wnd.winPtr, C.int(x), C.int(y))
+	wnd.x = x
+	wnd.y = y
+}
+
+// SetContentSize sets the size of the content area
+func (wnd *Window) SetContentSize(width, height int) {
+	C.Window_SetContentSize(wnd.winPtr, C.int(width), C.int(height))
+}
+
+// SetMinSize sets the minimum window size
+func (wnd *Window) SetMinSize(width, height int) {
+	C.Window_SetMinSize(wnd.winPtr, C.int(width), C.int(height))
+}
+
+// SetMaxSize sets the maximum window size
+func (wnd *Window) SetMaxSize(width, height int) {
+	C.Window_SetMaxSize(wnd.winPtr, C.int(width), C.int(height))
+}
+
+// SetAspectRatio sets the window's aspect ratio
+func (wnd *Window) SetAspectRatio(ratio float64) {
+	C.Window_SetAspectRatio(wnd.winPtr, C.double(ratio))
+}
+
+// SetLevel sets the window's level (determines layering)
+func (wnd *Window) SetLevel(level WindowLevel) {
+	C.Window_SetLevel(wnd.winPtr, C.int(level))
+}
+
+// SetAlphaValue sets the window's transparency (0.0 = transparent, 1.0 = opaque)
+func (wnd *Window) SetAlphaValue(alpha float64) {
+	C.Window_SetAlphaValue(wnd.winPtr, C.double(alpha))
+}
+
+// GetAlphaValue gets the window's current alpha value
+func (wnd *Window) GetAlphaValue() float64 {
+	return float64(C.Window_GetAlphaValue(wnd.winPtr))
+}
+
+// SetOpaque sets whether the window is opaque
+func (wnd *Window) SetOpaque(opaque bool) {
+	if opaque {
+		C.Window_SetOpaque(wnd.winPtr, C.int(1))
+	} else {
+		C.Window_SetOpaque(wnd.winPtr, C.int(0))
+	}
+}
+
+// SetHasShadow sets whether the window has a shadow
+func (wnd *Window) SetHasShadow(hasShadow bool) {
+	if hasShadow {
+		C.Window_SetHasShadow(wnd.winPtr, C.int(1))
+	} else {
+		C.Window_SetHasShadow(wnd.winPtr, C.int(0))
+	}
+}
+
+// SetMovable sets whether the window can be moved by the user
+func (wnd *Window) SetMovable(movable bool) {
+	if movable {
+		C.Window_SetMovable(wnd.winPtr, C.int(1))
+	} else {
+		C.Window_SetMovable(wnd.winPtr, C.int(0))
+	}
+}
+
+// SetMovableByWindowBackground sets whether window can be moved by dragging background
+func (wnd *Window) SetMovableByWindowBackground(movable bool) {
+	if movable {
+		C.Window_SetMovableByWindowBackground(wnd.winPtr, C.int(1))
+	} else {
+		C.Window_SetMovableByWindowBackground(wnd.winPtr, C.int(0))
+	}
+}
+
+// SetReleasedWhenClosed sets whether window is released when closed
+func (wnd *Window) SetReleasedWhenClosed(released bool) {
+	if released {
+		C.Window_SetReleasedWhenClosed(wnd.winPtr, C.int(1))
+	} else {
+		C.Window_SetReleasedWhenClosed(wnd.winPtr, C.int(0))
+	}
+}
+
+// SetHidesOnDeactivate sets whether window hides when app becomes inactive
+func (wnd *Window) SetHidesOnDeactivate(hides bool) {
+	if hides {
+		C.Window_SetHidesOnDeactivate(wnd.winPtr, C.int(1))
+	} else {
+		C.Window_SetHidesOnDeactivate(wnd.winPtr, C.int(0))
+	}
+}
+
+// SetIgnoresMouseEvents sets whether window ignores mouse events
+func (wnd *Window) SetIgnoresMouseEvents(ignores bool) {
+	if ignores {
+		C.Window_SetIgnoresMouseEvents(wnd.winPtr, C.int(1))
+	} else {
+		C.Window_SetIgnoresMouseEvents(wnd.winPtr, C.int(0))
+	}
+}
+
+// SetAcceptsMouseMovedEvents sets whether window accepts mouse moved events
+func (wnd *Window) SetAcceptsMouseMovedEvents(accepts bool) {
+	if accepts {
+		C.Window_SetAcceptsMouseMovedEvents(wnd.winPtr, C.int(1))
+	} else {
+		C.Window_SetAcceptsMouseMovedEvents(wnd.winPtr, C.int(0))
+	}
+}
+
+// State query methods
+func (wnd *Window) IsVisible() bool {
+	return C.Window_IsVisible(wnd.winPtr) != 0
+}
+
+func (wnd *Window) IsKeyWindow() bool {
+	return C.Window_IsKeyWindow(wnd.winPtr) != 0
+}
+
+func (wnd *Window) IsMainWindow() bool {
+	return C.Window_IsMainWindow(wnd.winPtr) != 0
+}
+
+func (wnd *Window) IsMiniaturized() bool {
+	return C.Window_IsMiniaturized(wnd.winPtr) != 0
+}
+
+func (wnd *Window) IsZoomed() bool {
+	return C.Window_IsZoomed(wnd.winPtr) != 0
+}
+
+func (wnd *Window) CanBecomeKeyWindow() bool {
+	return C.Window_CanBecomeKeyWindow(wnd.winPtr) != 0
+}
+
+func (wnd *Window) CanBecomeMainWindow() bool {
+	return C.Window_CanBecomeMainWindow(wnd.winPtr) != 0
+}
+
+func (wnd *Window) IsOpaque() bool {
+	return C.Window_IsOpaque(wnd.winPtr) != 0
+}
+
+func (wnd *Window) HasShadow() bool {
+	return C.Window_HasShadow(wnd.winPtr) != 0
+}
+
+func (wnd *Window) IsMovable() bool {
+	return C.Window_IsMovable(wnd.winPtr) != 0
+}
+
+func (wnd *Window) IsMovableByWindowBackground() bool {
+	return C.Window_IsMovableByWindowBackground(wnd.winPtr) != 0
+}
+
+func (wnd *Window) IsReleasedWhenClosed() bool {
+	return C.Window_IsReleasedWhenClosed(wnd.winPtr) != 0
+}
+
+func (wnd *Window) HidesOnDeactivate() bool {
+	return C.Window_HidesOnDeactivate(wnd.winPtr) != 0
+}
+
+func (wnd *Window) IgnoresMouseEvents() bool {
+	return C.Window_IgnoresMouseEvents(wnd.winPtr) != 0
+}
+
+func (wnd *Window) AcceptsMouseMovedEvents() bool {
+	return C.Window_AcceptsMouseMovedEvents(wnd.winPtr) != 0
+}
+
+// GetLevel gets the current window level
+func (wnd *Window) GetLevel() int {
+	return int(C.Window_GetLevel(wnd.winPtr))
+}
+
+// Document handling
+func (wnd *Window) SetDocumentEdited(edited bool) {
+	if edited {
+		C.Window_SetDocumentEdited(wnd.winPtr, C.int(1))
+	} else {
+		C.Window_SetDocumentEdited(wnd.winPtr, C.int(0))
+	}
+}
+
+func (wnd *Window) IsDocumentEdited() bool {
+	return C.Window_IsDocumentEdited(wnd.winPtr) != 0
+}
+
+func (wnd *Window) SetRepresentedFilename(filename string) {
+	cFilename := C.CString(filename)
+	defer C.free(unsafe.Pointer(cFilename))
+	C.Window_SetRepresentedFilename(wnd.winPtr, cFilename)
+}
+
+func (wnd *Window) GetRepresentedFilename() string {
+	cStr := C.Window_GetRepresentedFilename(wnd.winPtr)
+	defer C.free(unsafe.Pointer(cStr))
+	return C.GoString(cStr)
+}
+
+// Title methods
 func (wnd *Window) SetTitle(title string) {
 	cTitle := C.CString(title)
 	defer C.free(unsafe.Pointer(cTitle))
 	C.Window_SetTitle(wnd.winPtr, cTitle)
+	wnd.title = title
 }
 
+func (wnd *Window) GetTitle() string {
+	return wnd.title
+}
+
+// Button control methods
 func (wnd *Window) SetMiniaturizeButtonEnabled(enabled bool) {
 	if enabled {
 		C.Window_SetMiniaturizeButtonEnabled(wnd.winPtr, C.int(1))
@@ -199,10 +514,12 @@ func (wnd *Window) SetAllowsResizing(allowsResizing bool) {
 	}
 }
 
+// Menu handling
 func (wnd *Window) AddDefaultQuitMenu() {
 	C.Window_AddDefaultQuitMenu(wnd.winPtr)
 }
 
+// Event handlers
 func (wnd *Window) OnDidResize(fn EventHandler) {
 	wnd.callbacks[didResize] = fn
 }
