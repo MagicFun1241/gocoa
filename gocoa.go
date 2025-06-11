@@ -18,10 +18,13 @@ static inline void gocoa_main_thread_exec(int callbackID) {
         goCallbackTrigger(callbackID);
     });
 }
+
+static inline int gocoa_is_main_thread() {
+    return dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL) == dispatch_queue_get_label(dispatch_get_main_queue());
+}
 */
 import "C"
 import (
-	"runtime"
 	"sync"
 	"sync/atomic"
 )
@@ -65,9 +68,6 @@ func RunOnMainThread(fn func()) {
 }
 
 // isMainThread checks if the current goroutine is running on the main thread.
-// Note: This is a simplified check and may not be 100% accurate in all scenarios.
 func isMainThread() bool {
-	// This is a heuristic - the main thread typically has ID 1
-	// In practice, you might want to use a more robust method
-	return runtime.NumGoroutine() == 1 || C.dispatch_queue_get_label(C.dispatch_get_main_queue()) != nil
+	return C.gocoa_is_main_thread() != 0
 }
